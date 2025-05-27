@@ -15,7 +15,7 @@ pipeline {
         stage('Clone Repository') {
             steps {
                 cleanWs()
-                git branch: 'master', url: 'https://github.com/dvsr1411/onlinebookstore.git'
+                git branch: 'master', url: 'https://github.com/Manikanta07022002/cicd-servlet.git'
             }
         }
         stage('Build with Maven') {
@@ -25,7 +25,7 @@ pipeline {
         }
         stage('Push to Nexus') {
             steps {
-                nexusArtifactUploader artifacts: [[artifactId: 'onlinebookstore', classifier: '', file: 'target/onlinebookstore.war', type: 'war']], credentialsId: 'demo', groupId: 'onlinebookstore', nexusUrl: 'NEXUS_URL', nexusVersion: 'nexus3', protocol: 'http', repository: 'onlinebookstore', version: '0.0.1-SNAPSHOT'
+                nexusArtifactUploader artifacts: [[artifactId: 'loginpage', classifier: '', file: 'target/loginpage.war', type: 'war']], credentialsId: 'demo', groupId: 'loginpage', nexusUrl: 'NEXUS_URL', nexusVersion: 'nexus3', protocol: 'http', repository: 'loginpage', version: '0.0.1-SNAPSHOT'
             }
         }
         stage('Build Docker Image') {
@@ -47,13 +47,13 @@ pipeline {
         stage('Update manifest') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'git', passwordVariable: 'passwd', usernameVariable: 'user')]) {
-                    git "https://github.com/$user/onlinebookstore.git" 
+                    git "https://github.com/Manikanta07022002/cicd-servlet.git" 
                     sh "git config user.name $user"
-                    sh "git config user.email satwikreddy.danda@hotmail.com"
-                    sh "sed -i 's+dvsr1411/onlinebookstore.*+dvsr1411/onlinebookstore:$params.dockertag+g' manifests/tomcat.yml"
+                    sh "git config user.email veeramanikanta7020@gmail.com"
+                    sh "sed -i 's+veera/loginpage.*+veera/loginpage:$params.dockertag+g' manifests/tomcat.yml"
                     sh "git add ."
                     sh "git commit -m Commit-$params.dockertag"
-                    sh "git push https://$user:$passwd@github.com/$user/onlinebookstore.git master"
+                    sh "git push https://$user:$passwd@github.com/$user/loginpage.git master"
                 }
             }
         }
@@ -61,7 +61,7 @@ pipeline {
             steps {
                 withKubeConfig([credentialsId: 'kubernetes-config']) {
                     sh 'kubectl apply -f manifests/'      
-                    sh 'kubectl rollout restart deployment onlinebookstore'
+                    sh 'kubectl rollout restart deployment loginpage'
                 }
             }
         }
