@@ -1,22 +1,11 @@
-CREATE TABLE IF NOT EXISTS login (
-    name VARCHAR(20),
-    addr VARCHAR(20),
-    phno VARCHAR(10),
-    id VARCHAR(20) PRIMARY KEY,
-    pwd VARCHAR(20)
+
+CREATE DATABASE IF NOT EXISTS loginapp;
+USE loginapp;
+
+CREATE TABLE users (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  username VARCHAR(50) NOT NULL,
+  password VARCHAR(50) NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS books (
-    title VARCHAR(20),
-    author VARCHAR(20),
-    version VARCHAR(20),
-    publisher VARCHAR(20),
-    cost INT(10)
-);
-
-CREATE TABLE IF NOT EXISTS details (
-    id VARCHAR(20),
-    title VARCHAR(20),
-    amount INT(10),
-    cno VARCHAR(12)
-);
+INSERT INTO users (username, password) VALUES ('admin', 'admin123');
