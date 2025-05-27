@@ -25,7 +25,7 @@ pipeline {
         }
         stage('Push to Nexus') {
             steps {
-                nexusArtifactUploader artifacts: [[artifactId: 'loginpage', classifier: '', file: 'target/loginpage.war', type: 'war']], credentialsId: 'demo', groupId: 'loginpage', nexusUrl: 'NEXUS_URL', nexusVersion: 'nexus3', protocol: 'http', repository: 'loginpage', version: '0.0.1-SNAPSHOT'
+                nexusArtifactUploader artifacts: [[artifactId: 'loginpage', classifier: '', file: 'target/loginpage.war', type: 'war']], credentialsId: 'demo', groupId: 'com.login', nexusUrl: 'NEXUS_URL', nexusVersion: 'nexus3', protocol: 'http', repository: 'loginpage', version: '0.0.1-SNAPSHOT'
             }
         }
         stage('Build Docker Image') {
