@@ -22,9 +22,9 @@ spec:
         - name: MYSQL_USER
           value: "demo"
         - name: MYSQL_PASSWORD
-          value: "Sathwik123"
+          value: "veera123"
         - name: MYSQL_ROOT_PASSWORD
-          value: "Sathwik123"
+          value: "veera123"
         ports:
         - containerPort: 3306
           name: mysql
